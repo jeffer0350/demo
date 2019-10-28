@@ -1,0 +1,3 @@
+<ObjectMap version="1">
+  <ObjectMapEntry id="TXT_USER" locator="//BrowserApplication//BrowserWindow//input[@id='username']" />
+</ObjectMap>

@@ -1,0 +1,339 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>banrep.poc</groupId>
+	<artifactId>banrep.poc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>banrep.poc</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<serenity.version>1.9.7</serenity.version>
+		<serenity.maven.version>1.9.0</serenity.maven.version>
+		<serenity.cucumber.version>1.9.1</serenity.cucumber.version>
+		<maven.compiler.version>3.7.0</maven.compiler.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.surefire.version>2.20.1</maven.surefire.version>
+		<maven.resources.version>3.7.0</maven.resources.version>
+		<encoding>UTF-8</encoding>
+		<tags></tags>
+		<parallel.tests>4</parallel.tests>
+		<webdriver.base.url></webdriver.base.url>
+		<webdriver.driver>iexplorer</webdriver.driver>
+	</properties>
+	<!-- Define the Bintray repos for convenience -->
+	<repositories>
+		<repository>
+			<id>serenity</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/serenity/maven</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>serenity</id>
+			<name>bintray-plugins</name>
+			<url>http://dl.bintray.com/serenity/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.poi</groupId> <!--Lectura de documentos de excel para DDT -->
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
+
+		<!-- capchas <dependency> <groupId>com.sikulix</groupId> <artifactId>sikulixapi</artifactId> 
+			<version>1.1.2</version> </dependency> -->
+		<dependency>
+			<groupId>org.apache.poi</groupId> <!-- Archivos adicionales entre ellos el control de errores -->
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+			<exclusions>
+       	 	<exclusion>
+	            <groupId>net.serenity-bdd</groupId>
+	            <artifactId>serenity-report-resources</artifactId>
+        	</exclusion>
+    </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-screenplay</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>net.serenity-bdd</groupId>
+		    <artifactId>serenity-report-resources</artifactId>
+		    <version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-screenplay-webdriver</artifactId>
+			<version>${serenity.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-cucumber</artifactId>
+			<version>${serenity.cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>6.1.0.jre8</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc41</artifactId>
+			<version>4.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>silk4j</groupId>
+			<artifactId>silk4j_jtf</artifactId>
+			<version>19.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.assertthat</groupId>
+			<artifactId>selenium-shutterbug</artifactId>
+			<version>0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.core</groupId>
+			<artifactId>org.eclipse.core.resources</artifactId>
+			<version>3.7.100</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>1.8.6</version>
+		</dependency>
+		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId> 
+			<version>4.12</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.8.0</version>
+			<scope>test</scope>
+		</dependency>
+	
+	 
+
+		<!-- <dependency> <groupId>org.testng</groupId> <artifactId>testng</artifactId> 
+			<version>6.11</version> <scope>test</scope> </dependency> -->
+	</dependencies>
+
+
+
+	<!-- crea el perfil de ejecucion -->
+	<profiles>
+		<profile>
+			<id>SILK</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.21.0</version>
+						<configuration>
+							<includes>
+								<include>**/RunnerSilk.java</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<!-- fin crea el perfil de ejecucion -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.21.0</version>
+				<configuration>
+				 	<!--<skip>true</skip> -->
+					<testFailureIgnore>true</testFailureIgnore> 
+					<includes>
+						<include>**/features/**.java</include>
+					</includes>
+					<systemProperties>
+						<webdriver.driver>${webdriver.driver}</webdriver.driver>
+					</systemProperties>
+				</configuration>
+				<!-- <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
+					<version>2.20</version> <configuration> <skip>true</skip> <argLine>-Xmx1024m</argLine> 
+					</configuration> -->
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-report-plugin</artifactId>
+		        <version>3.0.0-M2</version>
+		        <configuration>
+		          <outputDirectory>${basedir}/target/site/evidencias</outputDirectory>
+		        </configuration>
+		      </plugin>
+		      <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-site-plugin</artifactId>
+		        <version>2.1</version>
+		        <configuration>
+		          <outputDirectory>${basedir}/target/site/evidencias</outputDirectory>
+		        </configuration>
+      		</plugin>
+
+
+
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.21.0</version>
+				<configuration>
+					<includes>
+						<include>**/features/**.java</include>
+					</includes>
+					<systemPropertyVariables>
+						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
+					</systemPropertyVariables>
+					<parallel>classes</parallel>
+					<threadCount>${parallel.tests}</threadCount>
+					<forkCount>${parallel.tests}</forkCount>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.resources.version}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+				<version>${serenity.maven.version}</version>
+				<dependencies>
+			        <dependency>
+			            <groupId>net.serenity-bdd</groupId>
+			            <artifactId>serenity-core</artifactId>
+			            <version>${serenity.version}</version>
+			            <exclusions>
+			                <exclusion>
+			                    <groupId>net.serenity-bdd</groupId>
+			                    <artifactId>serenity-report-resources</artifactId>
+			                </exclusion>
+			            </exclusions>
+			        </dependency>
+			        <dependency>
+			            <groupId>net.serenity-bdd</groupId>
+			                <artifactId>serenity-report-resources</artifactId>
+			                <version>${serenity.version}</version>
+			        </dependency>
+    			</dependencies>
+				<configuration>
+					<tags>${tags}</tags>
+				</configuration>
+				<executions>
+					<execution>
+						<id>serenity-reports</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-jar-plugin
+										</artifactId>
+										<versionRange>
+											[2.4,)
+										</versionRange>
+										<goals>
+											<goal>jar</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
